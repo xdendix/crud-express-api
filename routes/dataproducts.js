@@ -6,6 +6,18 @@ const { Product } = require('../models');
 
 const v = new Validator();
 
+router.get('/', async (req, res) => {
+    const dataproducts = await Product.findAll();
+    return res.json(dataproducts);
+});
+
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    const dataproduct = await Product.findByPk(id);
+
+    return res.json(dataproduct || 'Product not found');
+})
+
 router.post('/', async (req, res) => {
     const schema = {
         product_name: 'string',
@@ -56,6 +68,22 @@ router.put('/:id', async (req, res) => {
     datausers = await Product.update(req.body);
 
     res.json(datausers);
+});
+
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+
+    const dataproducts = await Product.findByPk(id);
+
+    if (!dataproducts) {
+        return res.json({ message: 'Product not found' });
+    }
+
+    await dataproducts.destroy();
+
+    res.json({
+        message: 'Product is deleted'
+    });
 });
 
 module.exports = router;
