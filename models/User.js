@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'maindb'
+        tableName: 'dbusers'
     });
 
     return User;
