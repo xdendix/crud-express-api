@@ -50,7 +50,7 @@ router.put('/:id', async (req, res) => {
     let datausers = await User.findByPk(id);
 
     if (!datausers) {
-        res.json({ messgae: 'User not found' });
+        res.json({ message: 'User not found' });
     }
 
     const schema = {
